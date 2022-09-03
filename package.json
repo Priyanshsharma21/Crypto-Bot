@@ -10,7 +10,7 @@
     "dev": "nodemon main.js"
   },
   "engines": {
-    "node": "16.15.1"
+    "node": "18.8.0"
   },
   "keywords": [],
   "author": "",
