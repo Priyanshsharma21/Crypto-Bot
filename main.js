@@ -244,50 +244,6 @@ axios.request(options).then(function (response) {
 
 
 
-
-
-
-// using fetch api 
-// bot.on('message',(message)=>{
-//         const userId = message.from.id
-//         const chatId = message.chat.id
-//         const name = message.from.first_name + " " + message.from.last_name
-//         const input = message.text
-
-//         if(input.includes('about')){
-           
-//         }
-
-       
-
-
-
-
-
-
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.listen(PORT, () => {
     console.log(`Running up the hill at ${PORT}km/hr speed`)
 })
