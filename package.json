@@ -9,6 +9,9 @@
     "start": "node main.js",
     "dev": "nodemon main.js"
   },
+  "engines": {
+    "node": "16.15.1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
