@@ -7,8 +7,14 @@ import {convert} from 'html-to-text';
 import dotenv from 'dotenv'
 dotenv.config()
 const TOKEN = process.env.TOKEN
+const API_KEY = process.env.X_RapidAPI_Key
 const PORT = process.env.PORT || 5000
 const app = express()
+
+
+
+
+
 
 const bot = new TelegramBot(TOKEN, {
     polling: true
@@ -33,7 +39,7 @@ const options = {
         offset: '0'
     },
     headers: {
-        'X-RapidAPI-Key': 'c4f5254226msh10570caa9c1f5f8p1def93jsnb6055c72ecd0',
+        'X-RapidAPI-Key': API_KEY,
         'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
     }
 };
@@ -41,7 +47,7 @@ const options = {
 const options2 = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': 'c4f5254226msh10570caa9c1f5f8p1def93jsnb6055c72ecd0',
+        'X-RapidAPI-Key': API_KEY,
         'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
     }
 }
@@ -50,7 +56,7 @@ const options3 = {
     method: 'GET',
     headers: {
       'X-BingApis-SDK': 'true',
-      'X-RapidAPI-Key': 'c4f5254226msh10570caa9c1f5f8p1def93jsnb6055c72ecd0',
+      'X-RapidAPI-Key': API_KEY,
       'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
     }
   };
@@ -74,6 +80,10 @@ axios.request(options).then(function (response) {
         const chatId = message.chat.id
         const name = message.from.first_name + " " + message.from.last_name
         const input = message.text
+        const date = new Date()
+        let hr = date.getHours() + ':' + date.getMinutes()
+
+        
 
         if (input == 'hello' || input == 'hi') {
             bot.sendMessage(userId, `
@@ -158,24 +168,18 @@ axios.request(options).then(function (response) {
                         Learn More = ${data.coinrankingUrl}
                         `)
 
-
                         data?.links?.map(link=>{
                             bot.sendMessage(userId,
                                 `${link.name}-->${link.url}`
                                 )
                         })
-            
-            
                     })
                     .catch(err => console.error('error:' + err));
-
                 }
 
             })
         }
         crypto(input)
-
-
 
 
         const cryptoNews = (query) => {
@@ -208,7 +212,7 @@ axios.request(options).then(function (response) {
                         Description -> ${item?.description}
                         ${item.url}
                         `)
-
+                        
                     })
                 })
                 .catch(err => console.error('error:' + err));
@@ -229,8 +233,6 @@ axios.request(options).then(function (response) {
             }
         }
 
-
-
     })
 
 
@@ -239,11 +241,20 @@ axios.request(options).then(function (response) {
 });
 
 
-
-
-
-
-
 app.listen(PORT, () => {
     console.log(`Running up the hill at ${PORT}km/hr speed`)
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 
