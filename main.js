@@ -62,7 +62,6 @@ axios.request(options).then(function (response) {
 
 
     bot.on('message', (message) => {
-        console.log(message)
         const userId = message.from.id
         const name = message.from.first_name + " " + message.from.last_name
         const input = message.text
