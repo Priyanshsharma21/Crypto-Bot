@@ -13,17 +13,10 @@ const app = express()
 
 
 
+const bot = new TelegramBot(TOKEN, {polling: true});
 
 
-
-const bot = new TelegramBot(TOKEN, {
-    polling: true
-});
-
-
-app.get('/', (req, res) => {
-    res.send('🤎🖤🤍❤️‍🔥💗Hello Crypto Lovers💙💚💛❤️💜🧡')
-})
+app.get('/', (req, res) => {res.send('🤎🖤🤍❤️‍🔥💗Hello Crypto Lovers💙💚💛❤️💜🧡')})
 
 
 const options = {
@@ -59,31 +52,20 @@ const options3 = {
       'X-RapidAPI-Key': API_KEY,
       'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
     }
-  };
+};
 
 
 
 axios.request(options).then(function (response) {
     const coins = response.data.data.coins
-    const {
-        total,
-        totalCoins,
-        totalMarkets,
-        totalExchanges,
-        totalMarketCap,
-        total24hVolume
-    } = response.data.data.stats
+    const {total,totalCoins,totalMarkets,totalExchanges,totalMarketCap,total24hVolume} = response.data.data.stats
 
 
     bot.on('message', (message) => {
+        console.log(message)
         const userId = message.from.id
-        const chatId = message.chat.id
         const name = message.from.first_name + " " + message.from.last_name
         const input = message.text
-        const date = new Date()
-        let hr = date.getHours() + ':' + date.getMinutes()
-
-        
 
         if (input == 'hello' || input == 'hi') {
             bot.sendMessage(userId, `
@@ -98,7 +80,7 @@ axios.request(options).then(function (response) {
                 Here are the list of things you can do with this bot - 
                 👉 'stats' - To get current total stats of crypto currencies.
                 👉 'bitcoin'(or any other crypto name) - To get all the possible information of that crypto currency.
-                👉 'list' - To get list of all crypto currencies with there rank, name, uuid.
+                👉 'list' - uTo get list of all crypto currencies with there rank, name, uid.
                 👉 'news bitcoin'(or any other crypto name) - To get top 5 news articles of that crypto currency.
 
                 Things to remember while using this bot - 
@@ -132,14 +114,14 @@ axios.request(options).then(function (response) {
                 );
               }
 
-              function toUpperCase(str) {
+            function toUpperCase(str) {
                 return str.replace(
                   /\w\S*/g,
                   function(txt) {
                     return txt.charAt(0).toUpperCase() + txt.substr(1).toUpperCase();
                   }
                 );
-              }
+            }
 
               const item = toTitleCase(query)
               const item2 = toUpperCase(query)
@@ -241,20 +223,4 @@ axios.request(options).then(function (response) {
 });
 
 
-app.listen(PORT, () => {
-    console.log(`Running up the hill at ${PORT}km/hr speed`)
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 
+app.listen(PORT, () => {console.log(`Running up the hill at ${PORT}km/hr speed`)})
